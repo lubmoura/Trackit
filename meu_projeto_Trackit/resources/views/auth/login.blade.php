@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="text-center mb-4">
-        <h1 class="h3 fw-bolder text-white shadow-sm">Trackit Login</h1> 
+        <h1 class="h3 fw-bolder text-white shadow-sm">Sign in to Trackit</h1> 
     </div>
 
     @if (session('status'))
