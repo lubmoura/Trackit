@@ -191,4 +191,56 @@ body {
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
   border-radius: 0.3rem;
+}   
+/*estrelas*/
+.rating {
+  direction: rtl; 
+  font-size: 2.5rem;
+  user-select: none;
+  text-align: left;
+}
+
+.rating input {
+  display: none; 
+}
+
+.rating label {
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.2s;
+  display: inline-block;
+}
+
+.rating label:hover,
+.rating label:hover ~ label {
+  color: gold;
+}
+
+
+.rating input:checked ~ label {
+  color: gold;
+}
+.review-stars .star-filled {
+  color: gold;
+  font-size: 1.5rem;
+}
+
+.review-stars .star-empty {
+  color: #ccc;
+  font-size: 1.5rem;
+}
+
+
+/*notas e comentarios mais bonitos*/
+.nota-label,
+.comentario-label {
+  font-size: 1.25rem;       /* Fonte maior */
+  font-weight: 600;         /* Mais negrito */
+  font-family: 'Poppins', sans-serif; /* Fonte moderna */
+  color: #f0f0f0;           /* Fica bonito em fundo escuro */
+  display: block;
+  margin-bottom: 0.5rem;
+  font-family: 'Orbitron', sans-serif;
+  
+
 }

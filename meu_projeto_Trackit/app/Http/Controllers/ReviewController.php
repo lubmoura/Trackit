@@ -82,30 +82,34 @@ class ReviewController extends Controller
         ]);
 
         return redirect()->route('dashboard')->with('success', 'Review enviada com sucesso!');
+    }   
+
+   public function showReviewForm($game)
+{
+    $games = [
+        ['title' => 'The last of us', 'image' => 'https://i.ibb.co/kVYnh7wj/the-last-of-us-part-ii-ellie-4k-2-2560x1440.jpg'],
+        ['title' => 'Zelda: BOTW', 'image' => 'https://images7.alphacoders.com/125/thumb-1920-1251235.jpg'],
+        ['title' => 'GTA: V', 'image' => 'https://image.api.playstation.com/vulcan/ap/rnd/202010/2217/rpD7MLaKY7rGToRMdTt1uEGP.png'],
+    ];
+
+ 
+    $gameData = collect($games)->firstWhere('title', $game);
+
+    
+    if (!$gameData) {
+        abort(404);
     }
 
-    public function showReviewForm($game)
-    {
-        $games = [
-            'Ellie Cat' => ['title' => 'Ellie Cat', 'image' => 'https://i.ibb.co/Z6hbvpXb/Ellie-cat.jpg'],
-            'Zelda: BOTW' => ['title' => 'Zelda: BOTW', 'image' => 'https://images7.alphacoders.com/125/thumb-1920-1251235.jpg'],
-            'GTA: V' => ['title' => 'GTA: V', 'image' => 'https://image.api.playstation.com/vulcan/ap/rnd/202010/2217/rpD7MLaKY7rGToRMdTt1uEGP.png'],
-        ];
+  
+    $reviews = Review::where('game_title', $gameData['title'])->latest()->get();
 
-        if (!isset($games[$game])) {
-            abort(404);
-        }
-
-        $gameData = $games[$game];
-        $reviews = Review::where('game_title', $gameData['title'])->latest()->get();
-
-        return view('reviews.form', compact('gameData', 'reviews'));
-    }
+    return view('reviews.form', compact('gameData', 'reviews'));
+}
 
     public function dashboard()
     {
         $games = [
-            ['title' => 'Ellie Cat', 'image' => 'https://i.ibb.co/Z6hbvpXb/Ellie-cat.jpg'],
+            ['title' => 'The last of us', 'image' => 'https://i.ibb.co/kVYnh7wj/the-last-of-us-part-ii-ellie-4k-2-2560x1440.jpg'],
             ['title' => 'Zelda: BOTW', 'image' => 'https://images7.alphacoders.com/125/thumb-1920-1251235.jpg'],
             ['title' => 'GTA V', 'image' => 'https://image.api.playstation.com/vulcan/ap/rnd/202010/2217/rpD7MLaKY7rGToRMdTt1uEGP.png'],
             ['title' => 'The Sims 4', 'image' => 'https://upload.wikimedia.org/wikipedia/en/5/5e/The_Sims_4_cover_art.jpg'],
