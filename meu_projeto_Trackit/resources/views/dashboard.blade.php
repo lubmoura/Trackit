@@ -6,8 +6,14 @@
   <title>POPULAR</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 
   <style>
+
+    body, h1, h2, h3, h4, h5, .card-title, .navbar-brand, .nav-link, .review-box {
+  font-family: 'Russo One', sans-serif;
+}
+
     html, body {
       height: 100%;
       margin: 0;
@@ -43,15 +49,15 @@
     }
 
     .card-img-top {
-      height: 340px;
-      object-fit: cover;
+      width: 100%;
+      height: auto;
+      max-height: 500px;
+      object-fit: contain;
+      background-color: #000;
+  padding: 1rem;
     }
 
-    @media (min-width: 768px) {
-      .card-img-top {
-        height: 400px;
-      }
-    }
+   
     .btn-roxo {
       background-color: #6f42c1;
       color: white;

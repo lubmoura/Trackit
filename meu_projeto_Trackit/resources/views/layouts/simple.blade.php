@@ -12,6 +12,9 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+
+
   
   <style>
     body {

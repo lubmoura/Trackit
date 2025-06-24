@@ -87,9 +87,18 @@ class ReviewController extends Controller
    public function showReviewForm($game)
 {
     $games = [
-        ['title' => 'The last of us', 'image' => 'https://i.ibb.co/kVYnh7wj/the-last-of-us-part-ii-ellie-4k-2-2560x1440.jpg'],
-        ['title' => 'Zelda: BOTW', 'image' => 'https://images7.alphacoders.com/125/thumb-1920-1251235.jpg'],
-        ['title' => 'GTA: V', 'image' => 'https://image.api.playstation.com/vulcan/ap/rnd/202010/2217/rpD7MLaKY7rGToRMdTt1uEGP.png'],
+        ['title' => 'The last of us Part II', 'image' => 'https://i.ibb.co/KjyPvkhN/The-Last-Of-Us-part-2.jpg'],
+        ['title' => 'Zelda: BOTW', 'image' => 'https://i.ibb.co/wxL3YFc/download.jpg'],
+        ['title' => 'GTA: V', 'image' => 'https://i.ibb.co/DD0Z6b82/download-1.jpg'],
+        ['title' => 'The Sims 4', 'image' => 'https://i.ibb.co/ZRP02KSG/download-2.jpg'],
+        ['title' => 'Life is Strange', 'image' => 'https://i.ibb.co/Pz6Ft0BK/download-3.jpg'],
+        ['title' => 'Skyrim', 'image' => 'https://i.ibb.co/35vctLBw/download-4.jpg'],
+        ['title' => 'Firewatch', 'image' => 'https://i.ibb.co/Y73cTsgX/download-5.jpg'],
+        ['title' => 'Stray', 'image' => 'https://i.ibb.co/6RH21vp3/download-6.jpg'],
+        ['title' => 'Red Dead Redemption 2', 'image' => 'https://i.ibb.co/B5rZWyg9/download-7.jpg'],
+        ['title' => 'Hollow Knight', 'image' => 'https://i.ibb.co/v64zmwTR/download-8.jpg'],
+
+    
     ];
 
  
@@ -109,14 +118,17 @@ class ReviewController extends Controller
     public function dashboard()
     {
         $games = [
-            ['title' => 'The last of us', 'image' => 'https://i.ibb.co/kVYnh7wj/the-last-of-us-part-ii-ellie-4k-2-2560x1440.jpg'],
-            ['title' => 'Zelda: BOTW', 'image' => 'https://images7.alphacoders.com/125/thumb-1920-1251235.jpg'],
-            ['title' => 'GTA V', 'image' => 'https://image.api.playstation.com/vulcan/ap/rnd/202010/2217/rpD7MLaKY7rGToRMdTt1uEGP.png'],
-            ['title' => 'The Sims 4', 'image' => 'https://upload.wikimedia.org/wikipedia/en/5/5e/The_Sims_4_cover_art.jpg'],
-            ['title' => 'Life is Strange', 'image' => 'https://cdn.akamai.steamstatic.com/steam/apps/319630/capsule_616x353.jpg'],
-            ['title' => 'Skyrim', 'image' => 'https://wallpapercave.com/wp/wp2033438.jpg'],
-            ['title' => 'Firewatch', 'image' => 'https://cdn.cloudflare.steamstatic.com/steam/apps/383870/header.jpg'],
-            ['title' => 'Stray', 'image' => 'https://cdn1.epicgames.com/offer/a5c786b9b84b4ec9b35a1bc78f4a8d59/EGS_Stray_BlueTwelveStudio_S2_1200x1600-8352f2156bfe91c0410a36e2dfdb948c'],
+            ['title' => 'The last of us Part II', 'image' => 'https://i.ibb.co/KjyPvkhN/The-Last-Of-Us-part-2.jpg'],
+            ['title' => 'Zelda: BOTW', 'image' => 'https://i.ibb.co/wxL3YFc/download.jpg'],
+            ['title' => 'GTA V', 'image' => 'https://i.ibb.co/DD0Z6b82/download-1.jpg'],
+            ['title' => 'The Sims 4', 'image' => 'https://i.ibb.co/ZRP02KSG/download-2.jpg'],
+            ['title' => 'Life is Strange', 'image' => 'https://i.ibb.co/Pz6Ft0BK/download-3.jpg'],
+            ['title' => 'Skyrim', 'image' => 'https://i.ibb.co/35vctLBw/download-4.jpg'],
+            ['title' => 'Firewatch', 'image' => 'https://i.ibb.co/Y73cTsgX/download-5.jpg'],
+            ['title' => 'Stray', 'image' => 'https://i.ibb.co/6RH21vp3/download-6.jpg'],
+            ['title' => 'Red Dead Redemption 2', 'image' => 'https://i.ibb.co/B5rZWyg9/download-7.jpg'],
+            ['title' => 'Hollow Knight', 'image' => 'https://i.ibb.co/v64zmwTR/download-8.jpg'],
+
         ];
 
         $userReviews = Review::where('user_id', Auth::id())

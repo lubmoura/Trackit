@@ -80,86 +80,6 @@ body {
   background-color: rgba(255, 255, 255, 0.1);
   text-decoration: none;
 }
-/* Fundo com degradê roxo */
-body {
-  background: linear-gradient(135deg, #2c003e, #6f42c1, #b98eff);
-  background-size: 400% 400%;
-  animation: gradientMove 15s ease infinite;
-  color: #eee;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Container do review */
-.review-container {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
-  border-radius: 12px;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
-}
-
-/* Imagem do jogo */
-.img-jogo {
-  max-width: 100%;
-  max-height: 400px;
-  border-radius: 12px;
-  object-fit: contain;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(111, 66, 193, 0.5);
-  display: block;
-  margin: 0 auto 20px;
-}
-
-/* Botão roxo personalizado */
-.btn-roxo {
-  background-color: #6f42c1;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.btn-roxo:hover {
-  background-color: #5936a8;
-  transform: scale(1.05);
-}
-
-/* Caixa de review */
-.review-box {
-  background-color: #2b2b2b;
-  border-left: 5px solid #6f42c1;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  color: #f1f1f1;
-}
-
-/* Botão de voltar */
-.voltar-btn {
-  font-size: 0.9rem;
-  color: #ccc;
-  text-decoration: none;
-  border: 1px solid #ccc;
-  padding: 5px 10px;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-  display: inline-block;
-}
-
-.voltar-btn:hover {
-  color: #fff;
-  border-color: #fff;
-  background-color: rgba(255, 255, 255, 0.1);
-  text-decoration: none;
-}
 
 /* Botões pastel para editar e excluir */
 .btn-pastel-blue {
@@ -241,6 +161,10 @@ body {
   display: block;
   margin-bottom: 0.5rem;
   font-family: 'Orbitron', sans-serif;
-  
 
 }
+ /*fonte do cabeçalho na parte do form*/
+body, h1, h2, h3, h4, h5, label, .btn, .form-label, textarea, input {
+  font-family: 'Russo One', sans-serif;
+}
+

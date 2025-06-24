@@ -14,7 +14,7 @@
     <input type="hidden" name="game_title" value="{{ $gameData['title'] }}">
 
     <div class="mb-3">
-       <label class="form-label nota-label">Nota</label>
+      <label class="form-label nota-label">Nota⭐ </label>
 
   <div class="rating">
     @for ($i = 5; $i >= 1; $i--)
@@ -26,7 +26,7 @@
 
     <div class="mb-3">
       
-      <label class="form-label comentario-label">💬 Comentário</label>
+      <label class="form-label comentario-label"> Comentário 💬</label>
 
       <textarea class="form-control" name="comment" rows="3" required></textarea>
     </div>
