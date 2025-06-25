@@ -132,14 +132,18 @@
                     Sem review ainda
                   </div>
                 @endif
+                
               </div> 
             </div> 
           </a> 
         </div> 
       @endforeach
     </div> 
+    <div class="d-flex justify-content-center mt-4">
+        {{ $paginatedUrls->links() }}
+    </div>
   </div> 
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+    
 </html>

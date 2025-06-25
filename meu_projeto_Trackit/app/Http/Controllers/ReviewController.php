@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Review;
+use App\Models\Url;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
@@ -15,24 +15,18 @@ class ReviewController extends Controller
         return view('reviews.index', compact('reviews'));
     }
 
-    public function create()
-    {
-        //
-    }
+    public function create() {}
 
-    public function show(string $id)
-    {
-        //
-    }
+    public function show(string $id) {}
 
     public function edit($id)
     {
         $review = Review::findOrFail($id);
 
         if ($review->user_id != Auth::id()) {
-        abort(403, 'Ação não autorizada');
-    }
-        
+            abort(403, 'Ação não autorizada');
+        }
+
         return view('reviews.edit', compact('review'));
     }
 
@@ -41,8 +35,8 @@ class ReviewController extends Controller
         $review = Review::findOrFail($id);
 
         if ($review->user_id != Auth::id()) {
-        abort(403, 'Ação não autorizada');
-    }
+            abort(403, 'Ação não autorizada');
+        }
 
         $request->validate([
             'rating' => 'required|integer|min:1|max:5',
@@ -57,9 +51,10 @@ class ReviewController extends Controller
     public function destroy($id)
     {
         $review = Review::findOrFail($id);
+
         if ($review->user_id != Auth::id()) {
-        abort(403, 'Ação não autorizada');
-    }
+            abort(403, 'Ação não autorizada');
+        }
 
         $review->delete();
 
@@ -82,54 +77,43 @@ class ReviewController extends Controller
         ]);
 
         return redirect()->route('dashboard')->with('success', 'Review enviada com sucesso!');
-    }   
-
-   public function showReviewForm($game)
-{
-    $games = [
-        ['title' => 'The last of us Part II', 'image' => 'https://i.ibb.co/KjyPvkhN/The-Last-Of-Us-part-2.jpg'],
-        ['title' => 'Zelda: BOTW', 'image' => 'https://i.ibb.co/wxL3YFc/download.jpg'],
-        ['title' => 'GTA: V', 'image' => 'https://i.ibb.co/DD0Z6b82/download-1.jpg'],
-        ['title' => 'The Sims 4', 'image' => 'https://i.ibb.co/ZRP02KSG/download-2.jpg'],
-        ['title' => 'Life is Strange', 'image' => 'https://i.ibb.co/Pz6Ft0BK/download-3.jpg'],
-        ['title' => 'Skyrim', 'image' => 'https://i.ibb.co/35vctLBw/download-4.jpg'],
-        ['title' => 'Firewatch', 'image' => 'https://i.ibb.co/Y73cTsgX/download-5.jpg'],
-        ['title' => 'Stray', 'image' => 'https://i.ibb.co/6RH21vp3/download-6.jpg'],
-        ['title' => 'Red Dead Redemption 2', 'image' => 'https://i.ibb.co/B5rZWyg9/download-7.jpg'],
-        ['title' => 'Hollow Knight', 'image' => 'https://i.ibb.co/v64zmwTR/download-8.jpg'],
-
-    
-    ];
-
- 
-    $gameData = collect($games)->firstWhere('title', $game);
-
-    
-    if (!$gameData) {
-        abort(404);
     }
 
-  
-    $reviews = Review::where('game_title', $gameData['title'])->latest()->get();
+    public function showReviewForm($game)
+    {
+        $urls = Url::all();
 
-    return view('reviews.form', compact('gameData', 'reviews'));
-}
+        $that = $this;
+        $gameData = $urls->map(function ($url) use ($that) {
+            return [
+                'title' => $that->extractTitleFromUrl($url->url),
+                'image' => $url->url,
+            ];
+        })->firstWhere('title', $game);
+
+        if (!$gameData) {
+            abort(404);
+        }
+
+        $reviews = Review::where('game_title', $gameData['title'])->latest()->get();
+
+        return view('reviews.form', compact('gameData', 'reviews'));
+    }
 
     public function dashboard()
     {
-        $games = [
-            ['title' => 'The last of us Part II', 'image' => 'https://i.ibb.co/KjyPvkhN/The-Last-Of-Us-part-2.jpg'],
-            ['title' => 'Zelda: BOTW', 'image' => 'https://i.ibb.co/wxL3YFc/download.jpg'],
-            ['title' => 'GTA V', 'image' => 'https://i.ibb.co/DD0Z6b82/download-1.jpg'],
-            ['title' => 'The Sims 4', 'image' => 'https://i.ibb.co/ZRP02KSG/download-2.jpg'],
-            ['title' => 'Life is Strange', 'image' => 'https://i.ibb.co/Pz6Ft0BK/download-3.jpg'],
-            ['title' => 'Skyrim', 'image' => 'https://i.ibb.co/35vctLBw/download-4.jpg'],
-            ['title' => 'Firewatch', 'image' => 'https://i.ibb.co/Y73cTsgX/download-5.jpg'],
-            ['title' => 'Stray', 'image' => 'https://i.ibb.co/6RH21vp3/download-6.jpg'],
-            ['title' => 'Red Dead Redemption 2', 'image' => 'https://i.ibb.co/B5rZWyg9/download-7.jpg'],
-            ['title' => 'Hollow Knight', 'image' => 'https://i.ibb.co/v64zmwTR/download-8.jpg'],
+        $reviews = Review::paginate(3);
 
-        ];
+        $paginatedUrls = Url::paginate(8); 
+
+        $that = $this; 
+
+        $games = $paginatedUrls->map(function ($url) use ($that) {
+            return [
+                'title' => $that->extractTitleFromUrl($url->url),
+                'image' => $url->url,
+            ];
+        });
 
         $userReviews = Review::where('user_id', Auth::id())
             ->get()
@@ -137,18 +121,28 @@ class ReviewController extends Controller
                 return [trim($review->game_title) => $review];
             });
 
-        $gamesWithReviews = array_map(function ($game) use ($userReviews) {
+        $gamesWithReviews = $games->map(function ($game) use ($userReviews) {
             $title = trim($game['title']);
-
-            $review = $userReviews->has($title) ? $userReviews->get($title) : null;
+            $review = $userReviews->get($title);
             return [
                 'title' => $game['title'],
                 'image' => $game['image'],
-                'review' => $review ? $review->comment : null,
-                'rating' => $review ? $review->rating : null,
+                'review' => $review?->comment,
+                'rating' => $review?->rating,
             ];
-        }, $games);
+        });
 
-        return view('dashboard', ['games' => $gamesWithReviews]);
+        return view('dashboard', [
+            'games' => $gamesWithReviews,
+            'reviews' => $reviews,
+            'paginatedUrls' => $paginatedUrls, 
+        ]);
+    }
+
+    private function extractTitleFromUrl($url)
+    {
+        $filename = pathinfo($url, PATHINFO_FILENAME);
+        $title = str_replace(['-', '_'], ' ', $filename);
+        return ucwords(strtolower($title));
     }
 }
