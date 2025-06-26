@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Favorite;
 use App\Models\Review;
 use App\Models\Url;
 use Illuminate\Http\Request;
@@ -100,49 +100,54 @@ class ReviewController extends Controller
         return view('reviews.form', compact('gameData', 'reviews'));
     }
 
-    public function dashboard()
-    {
-        $reviews = Review::paginate(3);
+  public function dashboard()
+{
+    $reviews = Review::paginate(3);
 
-        $paginatedUrls = Url::paginate(8); 
+    $paginatedUrls = Url::paginate(8); 
 
-        $that = $this; 
+    $that = $this; 
 
-        $games = $paginatedUrls->map(function ($url) use ($that) {
-            return [
-                'title' => $that->extractTitleFromUrl($url->url),
-                'image' => $url->url,
-            ];
+    $games = $paginatedUrls->map(function ($url) use ($that) {
+        return [
+            'title' => $that->extractTitleFromUrl($url->url),
+            'image' => $url->url,
+        ];
+    });
+
+    $userReviews = Review::where('user_id', Auth::id())
+        ->get()
+        ->mapWithKeys(function ($review) {
+            return [trim($review->game_title) => $review];
         });
 
-        $userReviews = Review::where('user_id', Auth::id())
-            ->get()
-            ->mapWithKeys(function ($review) {
-                return [trim($review->game_title) => $review];
-            });
+    $gamesWithReviews = $games->map(function ($game) use ($userReviews) {
+        $title = trim($game['title']);
+        $review = $userReviews->get($title);
+        return [
+            'title' => $game['title'],
+            'image' => $game['image'],
+            'review' => $review?->comment,
+            'rating' => $review?->rating,
+        ];
+    });
 
-        $gamesWithReviews = $games->map(function ($game) use ($userReviews) {
-            $title = trim($game['title']);
-            $review = $userReviews->get($title);
-            return [
-                'title' => $game['title'],
-                'image' => $game['image'],
-                'review' => $review?->comment,
-                'rating' => $review?->rating,
-            ];
-        });
+    $favoritedTitles = Favorite::where('user_id', Auth::id())->pluck('game_title')->toArray();
 
-        return view('dashboard', [
-            'games' => $gamesWithReviews,
-            'reviews' => $reviews,
-            'paginatedUrls' => $paginatedUrls, 
-        ]);
-    }
-
-    private function extractTitleFromUrl($url)
-    {
-        $filename = pathinfo($url, PATHINFO_FILENAME);
-        $title = str_replace(['-', '_'], ' ', $filename);
-        return ucwords(strtolower($title));
-    }
+   
+    return view('dashboard', [
+        'games' => $gamesWithReviews,
+        'reviews' => $reviews,
+        'paginatedUrls' => $paginatedUrls, 
+        'favoritedTitles' => $favoritedTitles, 
+    ]);
 }
+
+private function extractTitleFromUrl($url)
+{
+    $filename = pathinfo($url, PATHINFO_FILENAME);
+    $title = str_replace(['-', '_'], ' ', $filename);
+    return ucwords(strtolower($title));
+}
+
+ }

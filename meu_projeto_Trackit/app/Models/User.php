@@ -33,4 +33,10 @@ class User extends Authenticatable
     {
         return $this->is_admin === true;
     }
+
+    public function favorites()
+{
+    return $this->hasMany(Favorite::class);
+}
+
 }

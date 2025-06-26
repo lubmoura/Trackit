@@ -154,10 +154,10 @@ body {
 /*notas e comentarios mais bonitos*/
 .nota-label,
 .comentario-label {
-  font-size: 1.25rem;       /* Fonte maior */
-  font-weight: 600;         /* Mais negrito */
-  font-family: 'Poppins', sans-serif; /* Fonte moderna */
-  color: #f0f0f0;           /* Fica bonito em fundo escuro */
+  font-size: 1.25rem;     
+  font-weight: 600;         
+  font-family: 'Poppins', sans-serif; 
+  color: #f0f0f0;         
   display: block;
   margin-bottom: 0.5rem;
   font-family: 'Orbitron', sans-serif;
@@ -166,5 +166,119 @@ body {
  /*fonte do cabeçalho na parte do form*/
 body, h1, h2, h3, h4, h5, label, .btn, .form-label, textarea, input {
   font-family: 'Russo One', sans-serif;
+}
+
+/*parte dos favoritos no dashbord*/
+.star.animate {
+  animation: pulseStar 0.6s ease-in-out;
+}
+.star {
+  font-size: 1.5rem;
+  color: gold;
+  margin: 0 2px;
+}
+
+.review-box {
+  font-size: 0.9rem;
+  padding: 5px;
+}
+
+.favorite-form {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-roxo {
+  background-color: #6f42c1;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.3rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-roxo:hover {
+  background-color: #5936a8;
+}
+
+/* parte do css da aba favoritos*/
+.favorites-page {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.favorites-header {
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.favorites-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(15, 15, 15, 0.6);
+  z-index: -1;
+}
+
+.favorites-navbar {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 1rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.favorites-navbar .nav-link {
+  color: #fff !important;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.favorites-navbar .nav-link:hover {
+  color: #b98eff !important;
+}
+
+/* Botão de voltar da página de favoritos */
+.btn-voltar-dashboard {
+  background-color: #6f42c1;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.3rem;
+  transition: background-color 0.3s ease;
+  margin-bottom: 1.5rem;
+}
+
+.btn-voltar-dashboard:hover {
+  background-color: #5936a8;
+  color: #fff;
+}
+
+/* Card de favorito */
+.card-favorito {
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(111, 66, 193, 0.4);
+}
+
+.card-favorito .card-title {
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+/*botao favoritaar*/
+.favorite-icon i {
+  font-size: 1.6rem;
+  color: #b98eff;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.favorite-icon:hover i {
+  color: #fff;
+  transform: scale(1.2);
 }
 

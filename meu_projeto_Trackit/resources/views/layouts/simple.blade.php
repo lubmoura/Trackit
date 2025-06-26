@@ -14,6 +14,9 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
 
   
   <style>
@@ -53,6 +56,7 @@
           <li class="nav-item"><a class="nav-link active" href="#">Games</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Reviews</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Lists</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('favorites.index') }}">Favorites</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Journal</a></li>
         </ul>
 

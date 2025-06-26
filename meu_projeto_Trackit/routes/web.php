@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\FavoriteController;
 
 
 Route::get('/', function () {
@@ -28,6 +29,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/reviews/{id}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
     Route::put('/reviews/{id}', [ReviewController::class, 'update'])->name('reviews.update');
     Route::delete('/reviews/{id}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+
+    //rotas pra aba de favoritos
+    Route::post('/favorite', [FavoriteController::class, 'store'])->name('favorite.store');
+    Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
 
     
     

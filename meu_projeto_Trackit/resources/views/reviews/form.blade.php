@@ -3,7 +3,7 @@
 @section('content')
   <div class="container py-4 text-white review-container">
 
-    <a href="{{ route('dashboard') }}" class="btn voltar-btn mb-3">← Voltar para o Dashboard</a>
+    <a href="{{ route('dashboard') }}" class="btn voltar-btn mb-3">← Return to Games</a>
 
     <h2 class="mb-4">Review de {{ $gameData['title'] }}</h2>
 

@@ -42,15 +42,15 @@ class DatabaseSeeder extends Seeder
 
         $urls = [
             'https://i.ibb.co/KjyPvkhN/The-Last-Of-Us-part-2.jpg',
-            'https://i.ibb.co/wxL3YFc/download.jpg',
-            'https://i.ibb.co/DD0Z6b82/download-1.jpg',
-            'https://i.ibb.co/ZRP02KSG/download-2.jpg',
-            'https://i.ibb.co/Pz6Ft0BK/download-3.jpg',
-            'https://i.ibb.co/35vctLBw/download-4.jpg',
-            'https://i.ibb.co/Y73cTsgX/download-5.jpg',
+            'https://i.ibb.co/wxL3YFc/Zelda: Breath of the Wild.jpg',
+            'https://i.ibb.co/DD0Z6b82/Grand Theft Auth V.jpg',
+            'https://i.ibb.co/ZRP02KSG/The sims 4-2.jpg',
+            'https://i.ibb.co/Pz6Ft0BK/Life is Strange-3.jpg',
+            'https://i.ibb.co/35vctLBw/Skyrim-4.jpg',
+            'https://i.ibb.co/Y73cTsgX/FireWatch-5.jpg',
             'https://i.ibb.co/6RH21vp3/Stray.jpg',
-            'https://i.ibb.co/B5rZWyg9/download-7.jpg',
-            'https://i.ibb.co/v64zmwTR/download-8.jpg',
+            'https://i.ibb.co/B5rZWyg9/Red Dead Redemption II-7.jpg',
+            'https://i.ibb.co/v64zmwTR/Hollow Knight-8.jpg',
         ];
         
         foreach ($urls as $url) {
