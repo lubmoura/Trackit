@@ -11,71 +11,84 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
-    body, h1, h2, h3, h4, h5, .card-title, .navbar-brand, .nav-link, .review-box {
-      font-family: 'Russo One', sans-serif;
-    }
+   body, h1, h2, h3, h4, h5, .card-title, .navbar-brand, .nav-link, .review-box {
+  font-family: 'Russo One', sans-serif;
+}
 
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      overflow-x: hidden;
-    }
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
 
-    .bg-image {
-      background-image: url('https://images7.alphacoders.com/509/thumb-1920-509521.png');
-      background-size: cover;
-      background-position: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-    }
+.bg-image {
+  background-image: url('https://images7.alphacoders.com/509/thumb-1920-509521.png');
+  background-size: cover;
+  background-position: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
 
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
-      z-index: -1;
-    }
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
 
-    .navbar {
-      padding: 1rem 2rem;
-    }
+.navbar {
+  padding: 1rem 2rem;
+}
 
-    .card-img-top {
-      width: 100%;
-      height: auto;
-      max-height: 500px;
-      object-fit: contain;
-      background-color: #000;
-      padding: 1rem;
-    }
+.card-img-top {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  background-color: #000;
+  padding: 1rem;
+}
 
-    .btn-roxo {
-      background-color: #6f42c1;
-      color: white;
-      border: none;
-      padding: 0.375rem 0.75rem;
-      border-radius: 0.25rem;
-      transition: background-color 0.3s ease;
-    }
+/* Aqui o que você pediu: sombra e animação legal no hover nos cards */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 15px rgba(111, 66, 193, 0.4);
+  border-radius: 12px;
+}
 
-    .btn-roxo:hover {
-      background-color: #5936a8;
-      color: white;
-    }
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 30px #b98eff;
+}
 
-    .rating .star {
-      font-size: 1.4rem;
-      margin: 0 2px;
-    }
+.btn-roxo {
+  background-color: #6f42c1;
+  color: white;
+  border: none;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-roxo:hover {
+  background-color: #5936a8;
+  color: white;
+}
+
+.rating .star {
+  font-size: 1.4rem;
+  margin: 0 2px;
+}
+
   </style>
 </head>
 
@@ -111,7 +124,7 @@
     <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
       @foreach ($games as $game)
         <div class="col">
-          <div class="card h-100 border-0 shadow">
+          <div class="card card-favorito h-100 border-0 shadow">
             <a href="{{ route('reviews.game', ['game' => $game['title']]) }}" class="text-decoration-none">
               <img src="{{ $game['image'] }}" class="card-img-top" alt="{{ $game['title'] }}"
                    onerror="this.onerror=null;this.src='https://via.placeholder.com/300x450?text=Sem+Imagem';">
