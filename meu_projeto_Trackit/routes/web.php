@@ -33,8 +33,8 @@ Route::middleware('auth')->group(function () {
     //rotas pra aba de favoritos
     Route::post('/favorite', [FavoriteController::class, 'store'])->name('favorite.store');
     Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
+    Route::delete('/favorite/{game_title}', [FavoriteController::class, 'destroy'])->name('favorite.destroy');
 
-    
     
 
 

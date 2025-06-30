@@ -25,4 +25,16 @@ class FavoriteController extends Controller
         $favorites = Favorite::where('user_id', Auth::id())->get();
         return view('favorites.index', compact('favorites'));
     }
+
+    public function destroy($game_title)
+{
+    $favorite = Favorite::where('user_id', Auth::id())
+        ->where('game_title', $game_title)
+        ->firstOrFail();
+
+    $favorite->delete();
+
+    return redirect()->back()->with('success', 'Jogo removido dos favoritos!');
+}
+
 }

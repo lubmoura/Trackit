@@ -7,91 +7,77 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ asset('css/style.css') }}"> 
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
-   body, h1, h2, h3, h4, h5, .card-title, .navbar-brand, .nav-link, .review-box {
-  font-family: 'Russo One', sans-serif;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  overflow-x: hidden;
-}
-
-.bg-image {
-  background-image: url('https://images7.alphacoders.com/509/thumb-1920-509521.png');
-  background-size: cover;
-  background-position: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -2;
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: -1;
-}
-
-.navbar {
-  padding: 1rem 2rem;
-}
-
-.card-img-top {
-  width: 100%;
-  height: auto;
-  max-height: 500px;
-  object-fit: contain;
-  background-color: #000;
-  padding: 1rem;
-}
-
-/* Aqui o que você pediu: sombra e animação legal no hover nos cards */
-.card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 0 15px rgba(111, 66, 193, 0.4);
-  border-radius: 12px;
-}
-
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 0 30px #b98eff;
-}
-
-.btn-roxo {
-  background-color: #6f42c1;
-  color: white;
-  border: none;
-  padding: 0.375rem 0.75rem;
-  border-radius: 0.25rem;
-  transition: background-color 0.3s ease;
-}
-
-.btn-roxo:hover {
-  background-color: #5936a8;
-  color: white;
-}
-
-.rating .star {
-  font-size: 1.4rem;
-  margin: 0 2px;
-}
-
+    body, h1, h2, h3, h4, h5, .card-title, .navbar-brand, .nav-link, .review-box {
+      font-family: 'Russo One', sans-serif;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
+    .bg-image {
+      background-image: url('https://images7.alphacoders.com/509/thumb-1920-509521.png');
+      background-size: cover;
+      background-position: center;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -2;
+    }
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      z-index: -1;
+    }
+    .navbar {
+      padding: 1rem 2rem;
+    }
+    .card-img-top {
+      width: 100%;
+      height: auto;
+      max-height: 500px;
+      object-fit: contain;
+      background-color: #000;
+      padding: 1rem;
+    }
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 15px rgba(111, 66, 193, 0.4);
+      border-radius: 12px;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 30px #b98eff;
+    }
+    .btn-roxo {
+      background-color: #6f42c1;
+      color: white;
+      border: none;
+      padding: 0.375rem 0.75rem;
+      border-radius: 0.25rem;
+      transition: background-color 0.3s ease;
+    }
+    .btn-roxo:hover {
+      background-color: #5936a8;
+      color: white;
+    }
+    .rating .star {
+      font-size: 1.4rem;
+      margin: 0 2px;
+    }
+    .favorite-icon i {
+      font-size: 1.2rem;
+    }
   </style>
 </head>
-
 <body>
   <div class="bg-image"></div>
   <div class="overlay"></div>
@@ -129,14 +115,11 @@ html, body {
               <img src="{{ $game['image'] }}" class="card-img-top" alt="{{ $game['title'] }}"
                    onerror="this.onerror=null;this.src='https://via.placeholder.com/300x450?text=Sem+Imagem';">
             </a>
-
             <div class="card-body text-center">
               <h5 class="card-title">{{ $game['title'] }}</h5>
 
               @if (!empty($game['review']))
-                <div class="review-box mt-2">
-                  {{ $game['review'] }}
-                </div>
+                <div class="review-box mt-2">{{ $game['review'] }}</div>
                 <div class="rating mt-1">
                   @for ($i = 1; $i <= 5; $i++)
                     @if ($game['rating'] >= $i)
@@ -147,23 +130,32 @@ html, body {
                   @endfor
                 </div>
               @else
-                <div class="review-box mt-2 text-muted">
-                  Sem review ainda
-                </div>
+                <div class="review-box mt-2 text-muted">Not review yet</div>
               @endif
 
               @php
                 $isFavorited = in_array($game['title'], $favoritedTitles);
               @endphp
 
-              <form method="POST" action="{{ route('favorite.store') }}" class="favorite-form mt-2">
-                @csrf
-                <input type="hidden" name="game_title" value="{{ $game['title'] }}">
-                <input type="hidden" name="image_url" value="{{ $game['image'] }}">
-                <button type="submit" class="btn btn-link p-0 border-0 favorite-icon" title="Favoritar">
-                  <i class="{{ $isFavorited ? 'fa-solid text-primary' : 'fa-regular' }} fa-bookmark"></i>
-                </button>
-              </form>
+              @if ($isFavorited)
+                <form method="POST" action="{{ route('favorite.destroy', ['game_title' => $game['title']]) }}" class="favorite-form mt-2">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" class="btn btn-link p-0 border-0 favorite-icon" title="Remover dos favoritos">
+                    <i class="fa-solid fa-heart text-danger"></i>
+                  </button>
+                </form>
+              @else
+                <form method="POST" action="{{ route('favorite.store') }}" class="favorite-form mt-2">
+                  @csrf
+                  <input type="hidden" name="game_title" value="{{ $game['title'] }}">
+                  <input type="hidden" name="image_url" value="{{ $game['image'] }}">
+                  <button type="submit" class="btn btn-link p-0 border-0 favorite-icon" title="Favoritar">
+                    <i class="fa-regular fa-heart"></i>
+                  </button>
+                </form>
+              @endif
+
             </div>
           </div>
         </div>

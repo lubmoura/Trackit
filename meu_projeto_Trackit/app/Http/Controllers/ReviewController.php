@@ -19,6 +19,7 @@ class ReviewController extends Controller
 
     public function show(string $id) {}
 
+
     public function edit($id)
     {
         $review = Review::findOrFail($id);
@@ -100,6 +101,7 @@ class ReviewController extends Controller
         return view('reviews.form', compact('gameData', 'reviews'));
     }
 
+//
   public function dashboard()
 {
     $reviews = Review::paginate(3);
@@ -143,11 +145,13 @@ class ReviewController extends Controller
     ]);
 }
 
+//
 private function extractTitleFromUrl($url)
 {
     $filename = pathinfo($url, PATHINFO_FILENAME);
     $title = str_replace(['-', '_'], ' ', $filename);
     return ucwords(strtolower($title));
 }
+
 
  }

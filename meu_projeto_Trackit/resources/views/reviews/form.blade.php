@@ -5,7 +5,7 @@
 
     <a href="{{ route('dashboard') }}" class="btn voltar-btn mb-3">← Return to Games</a>
 
-    <h2 class="mb-4">Review de {{ $gameData['title'] }}</h2>
+    <h2 class="mb-4">Review: {{ $gameData['title'] }}</h2>
 
     <img src="{{ $gameData['image'] }}" alt="Imagem do jogo {{ $gameData['title'] }}" class="img-jogo mb-4">
 
@@ -14,7 +14,7 @@
     <input type="hidden" name="game_title" value="{{ $gameData['title'] }}">
 
     <div class="mb-3">
-      <label class="form-label nota-label">Nota⭐ </label>
+      <label class="form-label nota-label">Score⭐ </label>
 
   <div class="rating">
     @for ($i = 5; $i >= 1; $i--)
@@ -22,21 +22,22 @@
       <label for="star{{ $i }}" title="{{ $i }} estrela{{ $i > 1 ? 's' : '' }}">★</label>
     @endfor
   </div>
+  
 </div>
 
     <div class="mb-3">
       
-      <label class="form-label comentario-label"> Comentário 💬</label>
+      <label class="form-label comentario-label"> Comment 💬</label>
 
       <textarea class="form-control" name="comment" rows="3" required></textarea>
     </div>
 
-    <button type="submit" class="btn btn-roxo">Enviar Review</button>
+    <button type="submit" class="btn btn-roxo">Submit Review</button>
     </form>
 
     <hr class="my-4" />
 
-    <h3 class="mb-3">Reviews Recentes</h3>
+    <h3 class="mb-3">Recent Review</h3>
 
     @if ($reviews->count())
     @foreach ($reviews as $review)
@@ -68,7 +69,7 @@
     </div>
     @endforeach
     @else
-    <p>Nenhuma review ainda.</p>
+    <p>Not review yet.</p>
     @endif
 
   </div>

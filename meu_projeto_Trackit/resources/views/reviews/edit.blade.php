@@ -5,7 +5,7 @@
 
   <a href="{{ route('reviews.game', ['game' => $review->game_title]) }}" class="btn btn-outline-light mb-3">← Back</a>
 
-  <h2 class="mb-4">Editar Review de {{ $review->game_title }}</h2>
+  <h2 class="mb-4">Editar Review {{ $review->game_title }}</h2>
 
   <form method="POST" action="{{ route('reviews.update', $review->id) }}">
     @csrf
