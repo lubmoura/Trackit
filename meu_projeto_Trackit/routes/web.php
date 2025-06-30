@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\GameListController;
 
 
 Route::get('/', function () {
@@ -35,7 +36,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
     Route::delete('/favorite/{game_title}', [FavoriteController::class, 'destroy'])->name('favorite.destroy');
 
+    // rotas pra gamelist
+    Route::post('/gamelist', [GameListController::class, 'store'])->name('gamelist.store');
+    Route::delete('/gamelist/{game_title}', [GameListController::class, 'destroy'])->name('gamelist.destroy');
+    Route::get('/gamelist', [GameListController::class, 'index'])->name('gamelist.index')->middleware('auth');
+
     
+        
 
 
 

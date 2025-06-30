@@ -54,10 +54,9 @@
       <div class="collapse navbar-collapse" id="navbarTabs">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item"><a class="nav-link active" href="#">Games</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Reviews</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Lists</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('favorites.index') }}">Favorites</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Journal</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('gamelist.index') }}">GameList</a></li>
         </ul>
 
         <form method="POST" action="{{ route('logout') }}">

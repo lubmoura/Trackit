@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Favorite;
 use App\Models\Review;
 use App\Models\Url;
+use App\Models\GameList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -110,11 +111,14 @@ class ReviewController extends Controller
 
     $that = $this; 
 
+    $gameListTitles = GameList::where('user_id', Auth::id())->pluck('game_title')->toArray();
+
     $games = $paginatedUrls->map(function ($url) use ($that) {
         return [
             'title' => $that->extractTitleFromUrl($url->url),
             'image' => $url->url,
         ];
+
     });
 
     $userReviews = Review::where('user_id', Auth::id())
@@ -142,6 +146,7 @@ class ReviewController extends Controller
         'reviews' => $reviews,
         'paginatedUrls' => $paginatedUrls, 
         'favoritedTitles' => $favoritedTitles, 
+        'gameListTitles' => $gameListTitles,
     ]);
 }
 

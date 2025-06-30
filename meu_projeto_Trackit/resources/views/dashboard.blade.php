@@ -92,10 +92,9 @@
       <div class="collapse navbar-collapse" id="navbarTabs">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item"><a class="nav-link active" href="#">Games</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Reviews</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Lists</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('favorites.index') }}">Favorites</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Journal</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('gamelist.index') }}">GameList</a></li>
         </ul>
 
         <form method="POST" action="{{ route('logout') }}">
@@ -133,28 +132,53 @@
                 <div class="review-box mt-2 text-muted">Not review yet</div>
               @endif
 
-              @php
-                $isFavorited = in_array($game['title'], $favoritedTitles);
-              @endphp
 
-              @if ($isFavorited)
-                <form method="POST" action="{{ route('favorite.destroy', ['game_title' => $game['title']]) }}" class="favorite-form mt-2">
-                  @csrf
-                  @method('DELETE')
-                  <button type="submit" class="btn btn-link p-0 border-0 favorite-icon" title="Remover dos favoritos">
-                    <i class="fa-solid fa-heart text-danger"></i>
-                  </button>
-                </form>
-              @else
-                <form method="POST" action="{{ route('favorite.store') }}" class="favorite-form mt-2">
-                  @csrf
-                  <input type="hidden" name="game_title" value="{{ $game['title'] }}">
-                  <input type="hidden" name="image_url" value="{{ $game['image'] }}">
-                  <button type="submit" class="btn btn-link p-0 border-0 favorite-icon" title="Favoritar">
-                    <i class="fa-regular fa-heart"></i>
-                  </button>
-                </form>
+                  @php
+              $isFavorited = in_array($game['title'], $favoritedTitles);
+            @endphp
+
+            @if ($isFavorited)
+              <form method="POST" action="{{ route('favorite.destroy', ['game_title' => $game['title']]) }}" class="favorite-form mt-2 d-inline">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-link p-0 border-0 favorite-icon" title="Remover dos favoritos">
+                  <i class="fa-solid fa-heart text-danger"></i>
+                </button>
+              </form>
+            @else
+              <form method="POST" action="{{ route('favorite.store') }}" class="favorite-form mt-2 d-inline">
+                @csrf
+                <input type="hidden" name="game_title" value="{{ $game['title'] }}">
+                <input type="hidden" name="image_url" value="{{ $game['image'] }}">
+                <button type="submit" class="btn btn-link p-0 border-0 favorite-icon" title="Favoritar">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+              </form>
+            @endif
+
+              @php
+            $isInGameList = in_array($game['title'], $gameListTitles);
+          @endphp
+
+          @if ($isInGameList)
+            <form method="POST" action="{{ route('gamelist.destroy', ['game_title' => $game['title']]) }}" class="mt-2 d-inline">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="btn btn-link p-0 border-0" title="Remover da GameList">
+                <i class="fa-solid fa-gamepad" style="color: #6f42c1;"></i>
+              </button>
+            </form>
+          @else
+            <form method="POST" action="{{ route('gamelist.store') }}" class="mt-2 d-inline">
+              @csrf
+              <input type="hidden" name="game_title" value="{{ $game['title'] }}">
+              <input type="hidden" name="image_url" value="{{ $game['image'] }}">
+              <button type="submit" class="btn btn-link p-0 border-0" title="Adicionar à GameList">
+                <i class="fa-solid fa-gamepad" style="color: #6f42c1; opacity: 0.5;"></i>
+              </button>
+            </form>
               @endif
+
 
             </div>
           </div>
