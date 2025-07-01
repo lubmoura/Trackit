@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\GameList;
 use Illuminate\Support\Facades\Auth;

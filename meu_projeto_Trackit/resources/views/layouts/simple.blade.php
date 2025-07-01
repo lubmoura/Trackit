@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>@yield('title', 'Trackit')</title>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
 
+ 
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+ 
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
 
-  
   <style>
     body {
       background-color: #121212;
       color: white;
+      font-family: 'Russo One', sans-serif;
     }
+
     .btn-roxo {
       background-color: #6f42c1;
       color: white;
@@ -32,18 +33,21 @@
       border-radius: 0.25rem;
       transition: background-color 0.3s ease;
     }
+
     .btn-roxo:hover {
       background-color: #5936a8;
     }
+
     .navbar {
       padding: 1rem 2rem;
     }
   </style>
+
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
 
-  
+
   <nav class="navbar navbar-expand-lg navbar-dark navbar-roxa bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">POPULAR</a>
@@ -53,10 +57,10 @@
 
       <div class="collapse navbar-collapse" id="navbarTabs">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link active" href="#">Games</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('favorites.index') }}">Favorites</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Journal</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('gamelist.index') }}">GameList</a></li>
+         <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">Games</a>
+         <a class="nav-link {{ request()->routeIs('favorites.index') ? 'active' : '' }}" href="{{ route('favorites.index') }}">Favorites</a>
+         <a class="nav-link {{ request()->routeIs('journal.index') ? 'active' : '' }}" href="{{ route('journal.index') }}">History</a>
+         <a class="nav-link {{ request()->routeIs('gamelist.index') ? 'active' : '' }}" href="{{ route('gamelist.index') }}">GameList</a>
         </ul>
 
         <form method="POST" action="{{ route('logout') }}">
@@ -68,7 +72,7 @@
   </nav>
 
   
-  <div class="container py-4">
+  <div class="container-fluid py-4">
     @yield('content')
   </div>
 

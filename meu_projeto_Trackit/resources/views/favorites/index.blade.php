@@ -8,7 +8,7 @@
 
 <div class="favorites-page container py-4 text-white">
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="favorites-header">My Favorites</h2>
+    <h2 class="favorites-header">My Favorites:</h2>
     <a href="{{ route('dashboard') }}" class="btn btn-roxo">← Return to Games</a>
   </div>
 

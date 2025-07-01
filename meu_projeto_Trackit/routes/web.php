@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\GameListController;
+use App\Http\Controllers\JournalController;
 
 
 Route::get('/', function () {
@@ -41,7 +42,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/gamelist/{game_title}', [GameListController::class, 'destroy'])->name('gamelist.destroy');
     Route::get('/gamelist', [GameListController::class, 'index'])->name('gamelist.index')->middleware('auth');
 
-    
+    //rotas pra pagina journal
+    Route::get('/journal', [JournalController::class, 'index'])->name('journal.index');
         
 
 
