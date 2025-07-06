@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Url extends Model
 {
-    protected $fillable = ['url']; // libera o campo 'url' para preenchimento em massa
+    protected $fillable = ['url']; 
 }

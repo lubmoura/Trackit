@@ -26,7 +26,7 @@ class JournalController extends Controller
             return [
                 'title' => $title,
                 'image' => $url->url,
-                'story' => $journals[$title]->story ?? 'História não disponível',
+                'story' => $journals[$title]->story ?? 'Unvailble Synopses',
             ];
         });
 
