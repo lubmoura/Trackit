@@ -2,7 +2,7 @@
 
 /* Fundo com degradê roxo */
 body {
-  background: linear-gradient(135deg, #2c003e, #6f42c1, #b98eff);
+  background: linear-gradient(135deg, #2c003e, #27095e, #3c1975);
   background-size: 400% 400%;
   animation: gradientMove 15s ease infinite;
   color: #eee;
@@ -422,5 +422,51 @@ body, h1, h2, h3, h4, h5, label, .btn, .form-label, textarea, input {
 }
 
 
+/**/
+.btn-pastel-warning {
+  background: linear-gradient(135deg, #f9e2ae 0%, #f3d78a 100%);
+  color: #7a5e00;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  padding: 8px 16px;
+  box-shadow: 0 4px 8px rgba(243, 215, 138, 0.5);
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
 
-/* css do journasl*/
+.btn-pastel-warning:hover,
+.btn-pastel-warning:focus {
+  background: linear-gradient(135deg, #f3d78a 0%, #f9e2ae 100%);
+  color: #5d4500;
+  box-shadow: 0 6px 12px rgba(243, 215, 138, 0.7);
+  text-decoration: none;
+  outline: none;
+}
+
+.btn-pastel-danger {
+  background: linear-gradient(135deg, #f7b6b6 0%, #f39393 100%);
+  color: #7a2f2f;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  padding: 8px 16px;
+  box-shadow: 0 4px 8px rgba(243, 147, 147, 0.5);
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-pastel-danger:hover,
+.btn-pastel-danger:focus {
+  background: linear-gradient(135deg, #f39393 0%, #f7b6b6 100%);
+  color: #5d2222;
+  box-shadow: 0 6px 12px rgba(243, 147, 147, 0.7);
+  text-decoration: none;
+  outline: none;
+}

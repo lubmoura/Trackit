@@ -57,11 +57,15 @@
 
       <div class="collapse navbar-collapse" id="navbarTabs">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-         <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">Games</a>
-         <a class="nav-link {{ request()->routeIs('favorites.index') ? 'active' : '' }}" href="{{ route('favorites.index') }}">Favorites</a>
-         <a class="nav-link {{ request()->routeIs('journal.index') ? 'active' : '' }}" href="{{ route('journal.index') }}">Synopses</a>
-         <a class="nav-link {{ request()->routeIs('gamelist.index') ? 'active' : '' }}" href="{{ route('gamelist.index') }}">GameList</a>
-        </ul>
+        <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">Games</a>
+        <a class="nav-link {{ request()->routeIs('journal.index') ? 'active' : '' }}" href="{{ route('journal.index') }}">Synopses</a>
+
+        @if (!auth()->user()->is_admin)
+          <a class="nav-link {{ request()->routeIs('favorites.index') ? 'active' : '' }}" href="{{ route('favorites.index') }}">Favorites</a>
+          <a class="nav-link {{ request()->routeIs('gamelist.index') ? 'active' : '' }}" href="{{ route('gamelist.index') }}">GameList</a>
+        @endif
+      </ul>
+
 
         <form method="POST" action="{{ route('logout') }}">
           @csrf

@@ -7,6 +7,7 @@ use App\Models\Journal;
 use App\Models\GameList;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Http\Request;
 
 class JournalController extends Controller
 {
@@ -24,13 +25,14 @@ class JournalController extends Controller
             $title = ucwords(str_replace(['-', '_', ':'], ' ', $titleRaw));
 
             return [
+                'id' => $journals[$title]->id ?? null,
                 'title' => $title,
                 'image' => $url->url,
                 'story' => $journals[$title]->story ?? 'Unvailble Synopses',
             ];
         });
 
-      
+
         $games = new LengthAwarePaginator(
             $gamesCollection,
             $urlsPaginator->total(),
@@ -39,9 +41,64 @@ class JournalController extends Controller
             ['path' => request()->url(), 'query' => request()->query()]
         );
 
-        return view('journal.index', [
+        return view('journals.index', [
             'games' => $games,
             'gameListTitles' => $gameListTitles,
         ]);
+    }
+
+    //parte pro adm pd editar e excluir  e criar
+    public function create(Request $request)
+    {
+        $title = $request->get('title');
+        $image = $request->get('image');
+
+        return view('journals.create', compact('title', 'image'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'game_title' => 'required|string|max:255',
+            'image_url' => 'required|url',
+            'story' => 'required|string',
+        ]);
+
+        Journal::create([
+            'game_title' => $request->game_title,
+            'image_url' => $request->image_url,
+            'story' => $request->story,
+        ]);
+
+        return redirect()->route('journals.index')->with('success', 'História adicionada com sucesso!');
+    }
+
+    public function edit($id)
+    {
+        $journal = Journal::findOrFail($id);
+        return view('journals.edit', compact('journal'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $journal = Journal::findOrFail($id);
+
+        $request->validate([
+            'story' => 'required|string',
+        ]);
+
+        $journal->update([
+            'story' => $request->story,
+        ]);
+
+        return redirect()->route('journals.index')->with('success', 'História atualizada com sucesso!');
+    }
+
+    public function destroy($id)
+    {
+        $journal = Journal::findOrFail($id);
+        $journal->delete();
+
+        return redirect()->route('journals.index')->with('success', 'História excluída com sucesso!');
     }
 }

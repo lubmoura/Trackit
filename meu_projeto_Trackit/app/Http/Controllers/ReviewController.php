@@ -115,6 +115,7 @@ class ReviewController extends Controller
 
     $games = $paginatedUrls->map(function ($url) use ($that) {
         return [
+            'id' => $url->id,
             'title' => $that->extractTitleFromUrl($url->url),
             'image' => $url->url,
         ];
@@ -131,6 +132,7 @@ class ReviewController extends Controller
         $title = trim($game['title']);
         $review = $userReviews->get($title);
         return [
+            'id' => $game['id'],
             'title' => $game['title'],
             'image' => $game['image'],
             'review' => $review?->comment,
