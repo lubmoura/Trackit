@@ -5,68 +5,46 @@
 <div class="bg-image"></div>
 <div class="overlay"></div>
 
-<div class="journal-page container py-4 text-white">
+<div class="dashboard-page container py-4 text-white">
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="favorites-header">Games Synopses:</h2>
+    <h2 class="dashboard-header">Games Synopses</h2>
     <a href="{{ route('dashboard') }}" class="btn btn-roxo">← Return to Games</a>
   </div>
 
   <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
     @foreach ($games as $game)
       <div class="col">
-        <div class="card card-favorito h-100 border-0 shadow-sm">
+        <div class="card card-dashboard h-100 border-0 shadow-sm">
           <img src="{{ $game['image'] }}" alt="{{ $game['title'] }}" class="card-img-top"
                onerror="this.onerror=null;this.src='https://via.placeholder.com/300x450?text=No+Image';">
           <div class="card-body text-center">
             <h5 class="card-title">{{ $game['title'] }}</h5>
             <p class="card-text text-white text-start">{{ $game['story'] }}</p>
           </div>
-          <div class="card-footer bg-transparent border-0 text-end">
+
+          <div class="icon-row mt-3 d-flex justify-content-center gap-3 pb-3">
 
             @if (auth()->user()->is_admin)
-              {{-- botoes do adm--}}
-              @if (isset($game['id']))
-                <a href="{{ route('journals.edit', $game['id']) }}" class="btn btn-sm btn-warning me-2" title="Editar História">
-                  <i class="fa-solid fa-pen-to-square"></i>
-                </a>
+    @if (isset($game['id']))
+        <a href="{{ route('journals.edit', $game['id']) }}" class="btn btn-sm btn-admin-edit" title="Editar História">
+            <i class="fa-solid fa-pen-to-square"></i>
+        </a>
 
-                <form method="POST" action="{{ route('journals.destroy', $game['id']) }}" class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir esta história?');">
-                  @csrf
-                  @method('DELETE')
-                  <button type="submit" class="btn btn-sm btn-danger" title="Excluir História">
-                    <i class="fa-solid fa-trash"></i>
-                  </button>
-                </form>
-              @else
-                <a href="{{ route('journals.create', ['title' => $game['title'], 'image' => $game['image']]) }}"
-                   class="btn btn-sm btn-outline-light" title="Adicionar História">
-                  <i class="fa-solid fa-plus"></i> Adicionar
-                </a>
-              @endif
+        <form method="POST" action="{{ route('journals.destroy', $game['id']) }}" class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir esta história?');">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-sm btn-admin-delete" title="Excluir História">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </form>
+    @else
+        <a href="{{ route('journals.create', ['title' => $game['title'], 'image' => $game['image']]) }}"
+           class="btn btn-sm btn-outline-light" title="Adicionar História">
+            <i class="fa-solid fa-plus"></i> Add
+        </a>
+    @endif
+@endif
 
-            @else
-              {{-- Botoes dos users--}}
-              @php $isInGameList = in_array($game['title'], $gameListTitles); @endphp
-
-              @if ($isInGameList)
-                <form method="POST" action="{{ route('gamelist.destroy', ['game_title' => $game['title']]) }}" class="d-inline">
-                  @csrf
-                  @method('DELETE')
-                  <button type="submit" class="btn btn-link p-0 border-0" title="Remover da GameList">
-                    <i class="fa-solid fa-gamepad" style="color: #6f42c1;"></i>
-                  </button>
-                </form>
-              @else
-                <form method="POST" action="{{ route('gamelist.store') }}" class="d-inline">
-                  @csrf
-                  <input type="hidden" name="game_title" value="{{ $game['title'] }}">
-                  <input type="hidden" name="image_url" value="{{ $game['image'] }}">
-                  <button type="submit" class="btn btn-link p-0 border-0" title="Adicionar à GameList">
-                    <i class="fa-solid fa-gamepad" style="color: #6f42c1; opacity: 0.5;"></i>
-                  </button>
-                </form>
-              @endif
-            @endif
 
           </div>
         </div>
@@ -78,5 +56,93 @@
     {{ $games->links() }}
   </div>
 </div>
+
+
+<style>
+  .card-dashboard {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .card-dashboard:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 35px #6f42c1;
+  }
+
+  .card-img-top {
+    max-height: 480px;
+    padding: 0.8rem;
+    object-fit: contain;
+  }
+
+  .card-title {
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  }
+
+  .card-text {
+    font-size: 0.95rem;
+    color: #ccc;
+    text-align: left;
+    margin-top: 0.5rem;
+  }
+
+  .icon-row i {
+    font-size: 1.5rem;
+    transition: transform 0.2s ease;
+  }
+
+  .icon-row i:hover {
+    transform: scale(1.2);
+  }
+
+  /* Botões admin */
+  .btn-admin-edit, .btn-admin-delete, .btn-admin-add {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 8px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-admin-edit {
+    background-color: #7a6fc1;
+    color: #eee;
+  }
+
+  .btn-admin-edit:hover {
+    background-color: #6f5db3;
+  }
+
+  .btn-admin-delete {
+    background-color: #c17a7a;
+    color: #eee;
+  }
+
+  .btn-admin-delete:hover {
+    background-color: #ad6868;
+  }
+
+  .btn-admin-add {
+    background-color: #5cb85c;
+    color: #fff;
+  }
+
+  .btn-admin-add:hover {
+    background-color: #4cae4c;
+  }
+</style>
 
 @endsection
