@@ -48,7 +48,6 @@ Route::middleware('auth')->group(function () {
 
 });
     //admin
-
 Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::get('/admin/urls/{id}/edit', [AdminController::class, 'edit'])->name('urls.edit');
     Route::put('/admin/urls/{id}', [AdminController::class, 'update'])->name('urls.update');

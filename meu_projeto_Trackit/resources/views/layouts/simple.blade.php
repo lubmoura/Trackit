@@ -10,7 +10,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
 
- 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
@@ -59,7 +60,7 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">Games</a>
         <a class="nav-link {{ request()->routeIs('journal.index') ? 'active' : '' }}" href="{{ route('journal.index') }}">Synopses</a>
-
+        
         @if (!auth()->user()->is_admin)
           <a class="nav-link {{ request()->routeIs('favorites.index') ? 'active' : '' }}" href="{{ route('favorites.index') }}">Favorites</a>
           <a class="nav-link {{ request()->routeIs('gamelist.index') ? 'active' : '' }}" href="{{ route('gamelist.index') }}">GameList</a>
@@ -67,10 +68,16 @@
       </ul>
 
 
-        <form method="POST" action="{{ route('logout') }}">
-          @csrf
-          <button type="submit" class="btn btn-roxo">Logout</button>
-        </form>
+              <form method="POST" action="{{ route('logout') }}" class="me-2">
+        @csrf
+        <button type="submit" class="btn btn-roxo">Logout</button>
+      </form>
+
+      <a href="{{ route('profile.edit') }}" class="btn btn-outline-light">
+        <i class="fa-solid fa-user"></i> Perfil
+      </a>
+
+
       </div>
     </div>
   </nav>
@@ -81,5 +88,7 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  @stack('scripts')
+
 </body>
 </html>

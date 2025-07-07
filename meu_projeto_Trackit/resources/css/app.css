@@ -7,6 +7,7 @@ body {
   animation: gradientMove 15s ease infinite;
   color: #eee;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   font-family: 'Russo One', sans-serif;
 }
 
 @keyframes gradientMove {
@@ -181,6 +182,7 @@ body {
  /*fonte do cabeçalho na parte do form*/
 body, h1, h2, h3, h4, h5, label, .btn, .form-label, textarea, input {
   font-family: 'Russo One', sans-serif;
+  
 }
 
 /*parte dos favoritos no dashbord*/
@@ -469,4 +471,163 @@ body, h1, h2, h3, h4, h5, label, .btn, .form-label, textarea, input {
   box-shadow: 0 6px 12px rgba(243, 147, 147, 0.7);
   text-decoration: none;
   outline: none;
+}
+
+
+
+/* profile.css */
+
+/* Fundo com imagem e overlay escuro */
+.profile-background {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('https://images7.alphacoders.com/125/thumb-1920-1251235.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+.profile-overlay-dark {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0,0,0,0.6);
+    z-index: -1;
+}
+
+/* Container centralizado e responsivo */
+.profile-container {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 2rem;
+    color: #f0f0f0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Cards transparentes e estilizados */
+.profile-card {
+    background: rgba(30, 30, 30, 0.75);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+    margin-bottom: 2rem;
+    padding: 1.5rem 2rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.profile-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.85);
+}
+
+/* Cabeçalhos dos cards */
+.profile-card-header {
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #6f42c1; /* Roxo */
+    padding-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Inputs de texto */
+.profile-input-text,
+.profile-input-email,
+.profile-input-password {
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #555;
+    background-color: rgba(50, 50, 50, 0.9);
+    color: #f0f0f0;
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.profile-input-text:focus,
+.profile-input-email:focus,
+.profile-input-password:focus {
+    border-color: #6f42c1;
+    box-shadow: 0 0 0 3px rgba(111, 66, 193, 0.4);
+    outline: none;
+}
+
+/* Labels */
+.profile-label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+    color: #ccc;
+}
+
+/* Botões */
+.profile-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    text-decoration: none;
+    border: none;
+}
+
+/* Botão primário */
+.profile-btn-primary {
+    background-color: #6f42c1;
+    color: #ffffff;
+    border: 1px solid #6f42c1;
+}
+.profile-btn-primary:hover {
+    background-color: #8a63d2;
+    border-color: #8a63d2;
+}
+.profile-btn-primary:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(111, 66, 193, 0.5);
+}
+
+/* Botão de perigo (delete) */
+.profile-btn-danger {
+    background-color: #bf2a2a;
+    color: #ffffff;
+    border: 1px solid #bf2a2a;
+}
+.profile-btn-danger:hover {
+    background-color: #e53e3e;
+    border-color: #e53e3e;
+}
+.profile-btn-danger:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(191, 42, 42, 0.5);
+}
+
+/* Mensagens de status */
+.profile-status-message {
+    margin-top: 1rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+.profile-status-message.success {
+    background-color: #28a745;
+    color: #ffffff;
+}
+.profile-status-message.error {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+/* Espaçamentos nos forms */
+.profile-form-group {
+    margin-bottom: 1rem;
+}
+
+/* Flexbox para botão salvar e mensagens */
+.profile-flex-center {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }

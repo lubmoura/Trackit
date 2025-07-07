@@ -20,15 +20,21 @@
                 <div class="text-danger mt-2">{{ $message }}</div>
             @enderror
         </div>
+            
+                <div class="mb-3">
+                <label for="password" class="form-label">{{ __('Password') }}</label>
+                <div class="input-group">
+                    <input id="password" type="password" name="password" required autocomplete="current-password" 
+                        class="form-control rounded-start">
+                    <button class="btn btn-outline-secondary rounded-end" type="button" id="togglePassword">
+                        <i class="fa-solid fa-eye" id="toggleIcon"></i>
+                    </button>
+                </div>
+                @error('password')
+                    <div class="text-danger mt-2">{{ $message }}</div>
+                @enderror
+            </div>
 
-        <div class="mb-3">
-            <label for="password" class="form-label">{{ __('Password') }}</label>
-            <input id="password" type="password" name="password" required autocomplete="current-password" 
-                   class="form-control rounded">
-            @error('password')
-                <div class="text-danger mt-2">{{ $message }}</div>
-            @enderror
-        </div>
 
         <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="remember_me" name="remember">
@@ -47,4 +53,20 @@
             </button>
         </div>
     </form>
+
+    {{-- Script q mostra/ocultar senha --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('toggleIcon');
+
+            togglePassword.addEventListener('click', function () {
+                const isPassword = passwordInput.type === 'password';
+                passwordInput.type = isPassword ? 'text' : 'password';
+                toggleIcon.classList.toggle('fa-eye');
+                toggleIcon.classList.toggle('fa-eye-slash');
+            });
+        });
+    </script>
 </x-guest-layout>

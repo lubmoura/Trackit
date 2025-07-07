@@ -22,10 +22,10 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'chris@gmail.com'],
+            ['email' => 'luana@gmail.com'],
             [
-                'name' => 'Chris',
-                'password' => bcrypt('chris123'),
+                'name' => 'Luana',
+                'password' => bcrypt('luana123'),
                 'is_admin' => false,
             ]
         );
