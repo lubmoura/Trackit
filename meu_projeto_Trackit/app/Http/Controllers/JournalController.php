@@ -13,7 +13,7 @@ class JournalController extends Controller
 {
     public function index()
     {
-        $perPage = 7;
+        $perPage = 8;
         $urlsPaginator = Url::paginate($perPage);
 
         $journals = Journal::all()->keyBy('game_title');
